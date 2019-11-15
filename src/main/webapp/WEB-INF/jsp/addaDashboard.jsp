@@ -15,7 +15,7 @@ body {
 
 /* Style the header */
 header {
-  background-color: #666;
+  background-color: #000080;
   padding: 5px;
   text-align: left;
   font-size: 15px;
@@ -35,7 +35,7 @@ nav {
   -ms-flex: 1;
   flex: 1;
   background: #ccc;
-  padding: 8px;
+  padding: 5px;
 }
 
 /* Style the list inside the menu */
@@ -57,7 +57,7 @@ article {
 
 /* Style the footer */
 footer {
-  background-color: #777;
+  background-color: #000080;
   padding: 10px;
   text-align: center;
   color: white;
@@ -70,26 +70,136 @@ footer {
     flex-direction: column;
   }
 }
+
+
+/*Tab section  */
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  width: 13%; /* Four links of equal widths */
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+/* .navbar a.active {
+  background-color: #4CAF50;
+} */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn{
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropbtnInr
+{
+  font-size: 14px;  
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+ 
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn{
+  background-color: #666666;
+}
+
+.dropbtnInr:hover{
+	background-color: #bfbfbf;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+}
 </style>
 </head>
-<body>
+<body onload="onPageLoad()">
 
 <script>
-function openSocietyTab(societyName) {
+function openSocietyTab(tabName) {
   var i;
   var x = document.getElementsByClassName("city");
+  
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
   }
-  document.getElementById(societyName).style.display = "block";  
+  var x = document.getElementById(tabName);
+  if (window.getComputedStyle(x).visibility === "hidden") {
+	    x.style.visibility = "visible";
+	  }
+
+  document.getElementById(tabName).style.display = "block";  
+  
+  document.getElementById(tabName).innerHTML='<object type="text/html" data= tabName ></object>';
+  //alert('tab loaded');
+  
+
+}
+
+function onPageLoad()
+{
+	var x = document.getElementsByClassName("city");
+	for (i = 0; i < x.length; i++) {
+	    x[i].style.display = "none";  
+	  }
 }
 </script>
 
 <header>
+<div style="border: solid; width: 25%; border-radius: 10px; border-width:thin; ">
   <h3>Sukhwani Niketan Wing-F</h3>
-  <p>Sukhwani Niketan, Wing-F, </p><p>Waghere colony-4
+  <p>Waghere colony-4
      Pimpri, Pune. (411017)</p>
+  <p>Contact no :8793344570</p>
+</div>
 </header>
+
+<div style="border: solid;">
 
 <section>
   <nav>
@@ -111,52 +221,68 @@ function openSocietyTab(societyName) {
   </nav>
   
   <article>
-    <!-- the tab section -->
-    <div class="w3-bar w3-black">
-  		<button class="w3-bar-item w3-button" onclick="openSocietyTab('societyDetails')">Society Details</button>
-  		<button class="w3-bar-item w3-button" onclick="openSocietyTab('societyManagement')">Society Management</button>
- 	 	<button class="w3-bar-item w3-button" onclick="openSocietyTab('moneyManagement')">Money Management</button>
- 	 	<button class="w3-bar-item w3-button" onclick="openSocietyTab('eventNotice')">Event and Notice</button>
- 	 	<button class="w3-bar-item w3-button" onclick="openSocietyTab('aboutUs')">About Us</button>
- 	 	<button class="w3-bar-item w3-button" onclick="openSocietyTab('reports')">Reports</button>
-	</div>
+ 		<div class="navbar">	
+ 			
+ 			<a class="active" href="#">Home </a>
+ 			<div class="dropdown">
+ 				<button class="dropbtn">Society Services
+ 					<i class="fa fa-caret-down"></i>
+ 				</button>
+ 				<div class="dropdown-content">
+ 					<!-- <button class="dropbtnInr" onclick="openSocietyTab('housesTab')">Houses </button><br> -->
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('housesTab')">Houses</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('memberTab')">Members</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('parkingTab')">Parking</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('amenitieTab')">Amenities</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('staffTab')">Staff</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('vendorTab')">Vendors</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('goodsTab')">Goods</button><br>
+ 				</div>
+ 				</div>
+ 					<a href="#">Management </a>
+ 					<a href="#">Finance </a>
+ 					<a href="#">Events </a>
+ 					<a href="#">Reports </a>
+ 					<a href="#">About Us </a>
+ 				</div>
+ 		
+ 		
+ 		<!-- All inner tab div -->
+ 		
+ 		<div id="housesTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Society details</h2>
+  			<p>Society details has to display</p>
+		</div>
+		<div id="memberTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Member details</h2>
+  			<p>Member details has to display</p>
+		</div>
+		<div id="parkingTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Parking details</h2>
+  			<p>Parking details has to display</p>
+		</div>
+		<div id="amenitieTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Ammenities details</h2>
+  			<p>Ammenities details has to display</p>
+		</div>
+		<div id="staffTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Staff details</h2>
+  			<p>Staff details has to display</p>
+		</div>
+		<div id="vendorTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Vendor details</h2>
+  			<p>Vendor details has to display</p>
+		</div>
+		<div id="goodsTab" class="w3-container city" style="visibility: hidden;">
+  			<h2>Goods details</h2>
+  			<p>Goods details has to display</p>
+		</div>
 	
-	<div id="societyDetails" class="w3-container city">
-  		<h2>Society details</h2>
-  		<p>Society details has to display</p>
-	</div>
-
-	<div id="societyManagement" class="w3-container city" style="display:none">
-  		<h2>Society Management</h2>
-  		<p>Society Management has to display</p> 
-	</div>
-
-	<div id="moneyManagement" class="w3-container city" style="display:none">
-  		<h2>Money Management</h2>
-  		<p>Money Management has to display</p>
-	</div>
-
-	<div id="eventNotice" class="w3-container city" style="display:none">
-  		<h2>Event and Notice</h2>
-  		<p>Event and Notice has to display</p>
-	</div>
-
-	<div id="aboutUs" class="w3-container city" style="display:none">
-  		<h3>About Us</h3>
-  		<p><b>Address :</b>Sukhwani Niketan , Wing: F, Pimpri, Pune.(411017)</p>
-  		<p><b>Phone no :</b>8793344570</p>
-  		<hr><hr>
-	</div>
-
-	<div id="reports" class="w3-container city" style="display:none">
-  		<h2>Tokyo</h2>
-  		<p>Tokyo is the capital of Japan.</p>
-	</div>
-    
-    
+	
   </article>
 </section>
 
+</div>
 <footer>
   <p>Footer</p>
 </footer>

@@ -25,6 +25,16 @@ public class Login {
 		return "login";
 	}
 	
+	
+	//http://localhost:8181/ApartmentAdda/housesTab1
+	@RequestMapping(value="/tabName", method=RequestMethod.GET)
+	public String getdemo()
+	{
+		System.out.println("in house tab");
+		return "housesTab1";
+		
+	}
+	
 	@RequestMapping(value="/loginProcess", method=RequestMethod.POST)
 	public ModelAndView loginProcess(@ModelAttribute("user") LoginUser user)
 	{

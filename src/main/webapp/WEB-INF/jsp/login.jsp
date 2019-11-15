@@ -11,7 +11,7 @@
 </head>
 <body>
 <center>
-<div id="loginDiv" style="text-align:center; border: solid;height:150px; width:480px; background-color: #c6ffff;position: fixed; left: 50 %; margin-left: 37.5%; top: 50%;margin-top: -12. //5%">
+<div id="loginDiv" style="text-align:center; border: solid;height:150px; width:400px; background-color: #c6ffff; left: 50 %; margin-left: 3.5%; top: 50 %;margin-top: 12.5%">
 <br>
 	<form action="loginProcess" method="post">
 	
