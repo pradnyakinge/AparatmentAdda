@@ -157,9 +157,11 @@ footer {
 
 }
 </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    
 </head>
 <body onload="onPageLoad()">
-
 <script>
 function openSocietyTab(tabName) {
   var i;
@@ -172,11 +174,29 @@ function openSocietyTab(tabName) {
   if (window.getComputedStyle(x).visibility === "hidden") {
 	    x.style.visibility = "visible";
 	  }
-
-  document.getElementById(tabName).style.display = "block";  
   
-  document.getElementById(tabName).innerHTML='<object type="text/html" data= tabName ></object>';
-  //alert('tab loaded');
+  var tempId = tabName;
+   $.ajax({
+	 
+	  type : "GET",
+	    url : "/ApartmentAdda/housesTab",
+	    data : {tabName:tempId},
+	    timeout : 100000,
+	    success : function(tabName) {
+	    	debugger;
+	        console.log("SUCCESS: ", tabName);
+	        document.getElementById('housesTab').style.display = "block";
+	        document.getElementById('housesTab').innerHTML='<object type="text/html" data= "housesTab" ></object>'; 
+	        alert(response);   
+	    },	
+	    error : function(e) {
+	        console.log("ERROR: ", e);
+	        //display(e);
+	    },
+	    done : function(e) {
+	        console.log("DONE");
+	    }
+  });
   
 
 }
@@ -229,7 +249,6 @@ function onPageLoad()
  					<i class="fa fa-caret-down"></i>
  				</button>
  				<div class="dropdown-content">
- 					<!-- <button class="dropbtnInr" onclick="openSocietyTab('housesTab')">Houses </button><br> -->
  					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('housesTab')">Houses</button><br>
  					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('memberTab')">Members</button><br>
  					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('parkingTab')">Parking</button><br>

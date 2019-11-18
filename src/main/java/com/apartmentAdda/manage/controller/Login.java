@@ -26,8 +26,8 @@ public class Login {
 	}
 	
 	
-	//http://localhost:8181/ApartmentAdda/housesTab1
-	@RequestMapping(value="/tabName", method=RequestMethod.GET)
+	//http://localhost:8181/ApartmentAdda/housesTab
+	@RequestMapping(value="/housesTab", method=RequestMethod.GET)
 	public String getdemo()
 	{
 		System.out.println("in house tab");
