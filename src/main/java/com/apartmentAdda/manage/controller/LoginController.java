@@ -6,15 +6,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.apartmentAdda.manage.model.LoginUser;
 import com.apartmentAdda.manage.service.LoginService;
 
 @Controller
-public class Login {
+public class LoginController {
 	
 	@Autowired
 	LoginService loginService;
@@ -27,12 +29,37 @@ public class Login {
 	
 	
 	//http://localhost:8181/ApartmentAdda/housesTab
-	@RequestMapping(value="/housesTab", method=RequestMethod.GET)
-	public String getdemo()
+	@RequestMapping(value="/{tabId}", method=RequestMethod.GET)
+	public String openTabs(@PathVariable(value="tabId") String id)
 	{
-		System.out.println("in house tab");
-		return "housesTab1";
+		System.out.println("in house tab with id is :"+ id);
 		
+		if("houseTab".equals(id))
+		{
+			return "housesTab";
+		}
+		else if ("memberTab".equals(id)) {
+			return "memberTab";
+		}
+		else if ("parkingTab".equals(id)) {
+			return "parkingTab";
+		}
+		else if ("amenityTab".equals(id)) {
+			return "amenityTab";
+		}
+		else if ("staffTab".equals(id)) {
+			return "staffTab";
+		}
+		else if ("vendorTab".equals(id)) {
+			return "vendorTab";
+		}
+		else if ("goodsTab".equals(id)) {
+			return "goodsTab";
+		}
+		else
+		{
+			return "";
+		}
 	}
 	
 	@RequestMapping(value="/loginProcess", method=RequestMethod.POST)

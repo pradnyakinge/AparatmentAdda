@@ -161,16 +161,17 @@ footer {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     
 </head>
-<body onload="onPageLoad()">
+
+<body>
 <script>
-function openSocietyTab(tabName) {
+function openSocietyTab(divName, tabName) {
   var i;
   var x = document.getElementsByClassName("city");
   
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
   }
-  var x = document.getElementById(tabName);
+  var x = document.getElementById('divToOpen');
   if (window.getComputedStyle(x).visibility === "hidden") {
 	    x.style.visibility = "visible";
 	  }
@@ -179,35 +180,32 @@ function openSocietyTab(tabName) {
    $.ajax({
 	 
 	  type : "GET",
-	    url : "/ApartmentAdda/housesTab",
-	    data : {tabName:tempId},
+	    url : "/ApartmentAdda/"+tempId,
+	    data : {divName:tempId},
 	    timeout : 100000,
-	    success : function(tabName) {
+	    success : function(divName) {
 	    	debugger;
-	        console.log("SUCCESS: ", tabName);
-	        document.getElementById('housesTab').style.display = "block";
-	        document.getElementById('housesTab').innerHTML='<object type="text/html" data= "housesTab" ></object>'; 
-	        alert(response);   
+	        console.log("SUCCESS: ", divName);
+	        document.getElementById('divToOpen').style.display = "block";
+	        document.getElementById('divToOpen').innerHTML='<object type="text/html" data= '+tabName+' ></object>'; 
+	        //alert(response);   
 	    },	
 	    error : function(e) {
 	        console.log("ERROR: ", e);
 	        //display(e);
-	    },
-	    done : function(e) {
-	        console.log("DONE");
 	    }
   });
   
 
 }
 
-function onPageLoad()
+/* function onPageLoad()
 {
 	var x = document.getElementsByClassName("city");
-	for (i = 0; i < x.length; i++) {
+	/* for (i = 0; i < x.length; i++) {
 	    x[i].style.display = "none";  
-	  }
-}
+	  } 
+} */
 </script>
 
 <header>
@@ -249,13 +247,13 @@ function onPageLoad()
  					<i class="fa fa-caret-down"></i>
  				</button>
  				<div class="dropdown-content">
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('housesTab')">Houses</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('memberTab')">Members</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('parkingTab')">Parking</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('amenitieTab')">Amenities</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('staffTab')">Staff</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('vendorTab')">Vendors</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('goodsTab')">Goods</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','houseTab')">Houses</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','memberTab')">Members</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','parkingTab')">Parking</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','amenityTab')">Amenities</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','staffTab')">Staff</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','vendorTab')">Vendors</button><br>
+ 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','goodsTab')">Goods</button><br>
  				</div>
  				</div>
  					<a href="#">Management </a>
@@ -268,34 +266,10 @@ function onPageLoad()
  		
  		<!-- All inner tab div -->
  		
- 		<div id="housesTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Society details</h2>
-  			<p>Society details has to display</p>
+ 	  	<div id="divToOpen" class="w3-container city" style="visibility: hidden;">
+  			<h1>here the tab has to open</h1>
 		</div>
-		<div id="memberTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Member details</h2>
-  			<p>Member details has to display</p>
-		</div>
-		<div id="parkingTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Parking details</h2>
-  			<p>Parking details has to display</p>
-		</div>
-		<div id="amenitieTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Ammenities details</h2>
-  			<p>Ammenities details has to display</p>
-		</div>
-		<div id="staffTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Staff details</h2>
-  			<p>Staff details has to display</p>
-		</div>
-		<div id="vendorTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Vendor details</h2>
-  			<p>Vendor details has to display</p>
-		</div>
-		<div id="goodsTab" class="w3-container city" style="visibility: hidden;">
-  			<h2>Goods details</h2>
-  			<p>Goods details has to display</p>
-		</div>
+		
 	
 	
   </article>
