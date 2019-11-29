@@ -19,6 +19,9 @@ import com.apartmentAdda.manage.service.LoginService;
 public class LoginController {
 	
 	@Autowired
+	SocietyTabsController societyServiceController;
+	
+	@Autowired
 	LoginService loginService;
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
@@ -27,39 +30,13 @@ public class LoginController {
 		return "login";
 	}
 	
-	
 	//http://localhost:8181/ApartmentAdda/housesTab
-	@RequestMapping(value="/{tabId}", method=RequestMethod.GET)
-	public String openTabs(@PathVariable(value="tabId") String id)
+	@RequestMapping(value="/{parentTabId}/{tabId}", method=RequestMethod.GET)
+	public String openTabs(@PathVariable(value="parentTabId") String parentId, @PathVariable(value="tabId") String id)
 	{
-		System.out.println("in house tab with id is :"+ id);
+		System.out.println(parentId + " and " +id);
+		return societyServiceController.selectTab(parentId,id);
 		
-		if("houseTab".equals(id))
-		{
-			return "housesTab";
-		}
-		else if ("memberTab".equals(id)) {
-			return "memberTab";
-		}
-		else if ("parkingTab".equals(id)) {
-			return "parkingTab";
-		}
-		else if ("amenityTab".equals(id)) {
-			return "amenityTab";
-		}
-		else if ("staffTab".equals(id)) {
-			return "staffTab";
-		}
-		else if ("vendorTab".equals(id)) {
-			return "vendorTab";
-		}
-		else if ("goodsTab".equals(id)) {
-			return "goodsTab";
-		}
-		else
-		{
-			return "";
-		}
 	}
 	
 	@RequestMapping(value="/loginProcess", method=RequestMethod.POST)

@@ -1,284 +1,197 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Welcome to Sukhwani Niketan </title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #000080;
-  padding: 5px;
-  text-align: left;
-  font-size: 15px;
-  color: white;
-}
-
-/* Container for flexboxes */
-section {
-  display: -webkit-flex;
-  display: flex;
-  width: 100%
-}
-
-/* Style the navigation menu */
-nav {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  background: #ccc;
-  padding: 5px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: left;
-  font-size: 25px;
-}
-
-/* Style the content */
-article {
-  -webkit-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
-  background-color: #f1f1f1;
-  padding: 10px;
-}
-
-/* Style the footer */
-footer {
-  background-color: #000080;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
-@media (max-width: 600px) {
-  section {
-    -webkit-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-
-/*Tab section  */
-.navbar {
-  width: 100%;
-  background-color: #555;
-  overflow: auto;
-}
-
-.navbar a {
-  float: left;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  font-size: 15px;
-  width: 13%; /* Four links of equal widths */
-  text-align: center;
-}
-
-.navbar a:hover {
-  background-color: #000;
-}
-
-/* .navbar a.active {
-  background-color: #4CAF50;
-} */
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn{
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-.dropbtnInr
-{
-  font-size: 14px;  
-  background-color: #ffffff;
-  border: none;
-  outline: none;
-  padding: 10px 12px;
- 
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn{
-  background-color: #666666;
-}
-
-.dropbtnInr:hover{
-	background-color: #bfbfbf;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-}
-</style>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    
+  <title>Apartment Adda</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+<style type="text/css">
+	.header{
+		background-color: #19206f;
+		color: #fff;
+		padding: 6px 2px;
+	}
+	.footer{
+		background-color: #19206f;
+		    padding: 16px 8px;
+	}
+	
+	.header-inner{
+		    border: 1px solid #f2f2f2;
+    		padding: px;
+	}
+	.main { 
+        text-align:center; 
+        font-family:"Times New Roman"; 
+    } 
+    .marq { 
+        padding-top:30px; 
+        padding-bottom:30px; 
+    } 
+    .geek1 { 
+        font-size:20px; 
+        font-weight:bold; 
 
+    } 
+    .geek2 { 
+        text-align:center; 
+    }
+    .btn_toggle{
+    	background: none;
+    	padding: 15px;
+    	color: #9d9d9d;
+    }
+    .btn_toggle:hover,.btn_toggle:focus {
+    	color: #9d9d9d;
+    }
+</style>
 <body>
 <script>
-function openSocietyTab(divName, tabName) {
-  var i;
-  var x = document.getElementsByClassName("city");
-  
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  var x = document.getElementById('divToOpen');
-  if (window.getComputedStyle(x).visibility === "hidden") {
-	    x.style.visibility = "visible";
-	  }
-  
-  var tempId = tabName;
-   $.ajax({
-	 
-	  type : "GET",
-	    url : "/ApartmentAdda/"+tempId,
-	    data : {divName:tempId},
-	    timeout : 100000,
-	    success : function(divName) {
-	    	debugger;
-	        console.log("SUCCESS: ", divName);
-	        document.getElementById('divToOpen').style.display = "block";
-	        document.getElementById('divToOpen').innerHTML='<object type="text/html" data= '+tabName+' ></object>'; 
-	        //alert(response);   
-	    },	
-	    error : function(e) {
-	        console.log("ERROR: ", e);
-	        //display(e);
-	    }
-  });
-  
-
-}
-
-/* function onPageLoad()
-{
-	var x = document.getElementsByClassName("city");
-	/* for (i = 0; i < x.length; i++) {
-	    x[i].style.display = "none";  
-	  } 
-} */
+	function openSocietyTab(divName, parentTabName, subTabName)
+	{
+		debugger;
+		var i;
+		  var x = document.getElementById(divName); 
+		  var parentTempId = parentTabName;
+		  var tempId = subTabName;
+		   $.ajax({
+			 
+			  type : "GET",
+			    url : "/ApartmentAdda/"+parentTempId+"/"+tempId,
+			    data : {x:tempId},
+			    timeout : 100000,
+			    success : function(x) {
+			    	debugger;
+			        console.log("SUCCESS: ", x);
+			        var theInfoDiv = document.getElementById('tabToOpen');  
+			       // theInfoDiv.classList.add(x);  
+			       // theInfoDiv.classList.remove('hidden');  
+			        document.getElementById("tabToOpen").innerHTML = x;
+			    },	
+			    error : function(e) {
+			        console.log("ERROR: ", e);
+			    }
+		  });
+	}
 </script>
-
-<header>
-<div style="border: solid; width: 25%; border-radius: 10px; border-width:thin; ">
-  <h3>Sukhwani Niketan Wing-F</h3>
-  <p>Waghere colony-4
-     Pimpri, Pune. (411017)</p>
-  <p>Contact no :8793344570</p>
-</div>
-</header>
-
-<div style="border: solid;">
-
 <section>
-  <nav>
-    
-      <B style="font-size: 21px;"><u>News Letters</u></B>
-      <div>
-      <marquee behavior="scroll" direction="down">
-      	<ul>
-      		<li>News no 1</li>
-      		<li>News no 2</li>
-      		<li>News no 3</li>
-      		<li>News no 4</li>
-      		<li>News no 5</li>
-      		<li>News no 6</li>
-      		<li>News no 7</li>
-      	</ul>
-      </marquee>
-      </div>
-  </nav>
-  
-  <article>
- 		<div class="navbar">	
- 			
- 			<a class="active" href="#">Home </a>
- 			<div class="dropdown">
- 				<button class="dropbtn">Society Services
- 					<i class="fa fa-caret-down"></i>
- 				</button>
- 				<div class="dropdown-content">
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','houseTab')">Houses</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','memberTab')">Members</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','parkingTab')">Parking</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','amenityTab')">Amenities</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','staffTab')">Staff</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','vendorTab')">Vendors</button><br>
- 					<button class="w3-bar-item w3-button dropbtnInr" onclick="openSocietyTab('tabToOpen','goodsTab')">Goods</button><br>
- 				</div>
- 				</div>
- 					<a href="#">Management </a>
- 					<a href="#">Finance </a>
- 					<a href="#">Events </a>
- 					<a href="#">Reports </a>
- 					<a href="#">About Us </a>
- 				</div>
- 		
- 		
- 		<!-- All inner tab div -->
- 		
- 	  	<div id="divToOpen" class="w3-container city" style="visibility: hidden;">
-  			<h1>here the tab has to open</h1>
+			<!-- header section start -->
+			<div class="container-fluid header">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="header-inner">
+							<h3>Sukhwani Niketan Wing-F</h3>
+  							<p>Waghere colony-4
+     						   Pimpri, Pune. (411017)</p>
+  							<p>Contact no :8793344570</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header section end -->
+			<!-- news letter + tab section start -->
+			<div class="container-fluid ht">
+				<div class="row">
+				    <!-- news letter start -->
+					<div class="col-md-4" style="background:#e0ebeb">
+						<div>
+							<h3><B>News Letter</B> </h3>
+						</div>
+			 			<div class = "main" style="height: 380px;"> 
+    						<marquee class="marq" direction = "up" loop=""style="height: 380px;" > 
+        						<div class="geek1">marquee</div> 
+        						<div class="geek1">marquee</div> 
+        						<div class="geek1">marquee</div> 
+        						<div class="geek1">marquee</div> 
+        						<div class="geek1">marquee</div> 
+        						<div class="geek2">A computer science portal for geeks</div> 
+    						</marquee> 
+    					</div> 
+					</div>
+					<!-- news letter end -->
+					<!-- tab section start -->
+					<div class="col-md-8" style="padding: 2px;">
+						<nav class="navbar navbar-inverse">
+  							<div class="container-fluid">
+    							<div class="collapse navbar-collapse" id="myNavbar">
+      								<ul class="nav navbar-nav">
+      								<li><a data-toggle="pill" href="#photoGallary">Home</a></li>
+	        							<li>
+		        							<div class="dropdown">
+		    									<button class="btn dropdown-toggle btn_toggle" type="button" data-toggle="dropdown">Society Services
+		    										<span class="caret"></span>
+		    									</button>
+		    									<ul class="dropdown-menu">
+		    										<li><a href="#" onclick="openSocietyTab('tabToOpen','societyService','houseTab')">Houses</a></li>
+		    										<li><a href="#">Members</a></li>
+		    										<li><a href="#">Parking</a></li>
+		    										<li><a href="#">Amenities</a></li>
+		    										<li><a href="#">Staff</a></li>
+		    										<li><a href="#">Vendors</a></li>
+		    										<li><a href="#">Goods</a></li>
+		    									</ul>
+		  									</div>
+	  									</li>
+	  									<li>
+		        							<div class="dropdown">
+		    									<button class="btn dropdown-toggle btn_toggle" type="button" data-toggle="dropdown">Management
+		    										<span class="caret"></span>
+		    									</button>
+		    									<ul class="dropdown-menu">
+		    										<li><a href="#">Members</a></li>
+		    										<li><a href="#">Staff</a></li>
+		    										<li><a href="#">Vendors</a></li>
+		    										<li><a href="#">Goods</a></li>
+		    									</ul>
+		  									</div>
+	  									</li>
+	  									<li><a data-toggle="pill" href="#menu1">Finance</a></li>
+	  									<li><a data-toggle="pill" href="#menu1">Events</a></li>
+	  									<li><a data-toggle="pill" href="#menu1">Reports</a></li>
+	  									<li><a data-toggle="pill" href="#aboutUs">About Us</a></li>
+	  									
+      								</ul>
+    							</div>
+  							</div>
+						</nav>
+ 
+ 				<div class="tab-content"style="height: 380px;">
+    				<div id="photoGallary" class="tab-pane fade in active">
+      					<h3>HOME</h3>
+      					<p>Photo gallary</p>
+    				</div>
+    				
+    				<div id="menu1" class="tab-pane fade" >
+      					<h3>Menu 1</h3>
+      					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    				</div>
+    				
+    				
+    				<div id="tabToOpen" class="tab-pane fade" >
+      					<h3>Tab to open</h3>
+      					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    				</div>
+    				
+    				<div id="aboutUs" class="tab-pane fade">
+      					<h3>Welcome to Sukhwani Niketan-F.</h3>
+      					<div style="border: solid; background-color: silver;">
+     						<p>Secretary Name : Mr. Rahul Gopal Kinge</p>
+     						<p>Flat No : Flat No:403</p>
+     						<p>Contact Details : 8793344570</p>
+      					</div>
+    				</div>
+  				</div>
 		</div>
-		
+		</div>
+	</div>
+	<div class="container-fluid footer">
+			<div class="footer_inner">footer</div>
+	</div>
 	
-	
-  </article>
 </section>
-
-</div>
-<footer>
-  <p>Footer</p>
-</footer>
-
 </body>
 </html>
