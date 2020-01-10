@@ -1,5 +1,12 @@
 package com.apartmentAdda.manage.controller;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -70,4 +77,54 @@ public class LoginController {
 		}
 		return mv;
 	}
+	
+	//@RequestMapping(value="/{email}/{subject}/{message}", method = RequestMethod.POST)
+	@RequestMapping(value="/MailDispatcherServlet", method=RequestMethod.POST)
+	public void loginProcess1111(@RequestParam(value = "email") String email, @RequestParam(value = "subject") String subject, @RequestParam(value = "message") String message)
+	{
+	   System.out.println("data is :" +email + "," +subject + ", "+message);
+	   String toEmail = email;
+	   String toSubject = subject;
+	   String toMessage = message;
+	   String fromEmail ="niketansukhwaniF@gmail.com";
+	   String username = "niketansukhwaniF";
+	   String password = "Taj@2012";
+	   try
+	   {
+		   Properties props = System.getProperties();
+		   props.put("mail.smtp.host", "smtp.gmail.com");
+		   props.put("mail.smtp.auth", "true");
+		   props.put("mail.smtp.port", "465");
+		   props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		   props.put("mail.smtp.socketFactory.port", "465");
+		   props.put("mail.smtp.socketFactory.fallback", "false");
+		   
+		   Session mailSession = Session.getDefaultInstance(props, null);
+		   mailSession.setDebug(true);
+		   
+		   Message mailMessage = new MimeMessage(mailSession);
+		   mailMessage.setFrom(new InternetAddress(fromEmail));
+		   mailMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+		   mailMessage.setContent(toMessage, "text/html");
+		   mailMessage.setSubject(toSubject);
+		   
+		   Transport transport = mailSession.getTransport("smtp");
+		   transport.connect("smtp.gmail.com", username, password);
+		   transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+		   
+		   
+		   
+		   
+	   }
+	   catch(Exception e)
+	   {
+		   
+	   }
+		//return "login";
+	}
+	
+	
+	
+	
+	
 }
